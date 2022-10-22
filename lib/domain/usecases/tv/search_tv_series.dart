@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
-import '../../entities/tv/tv.dart';
+import '../../entities/tv/tv_series.dart';
 import '../../repositories/tv_repository.dart';
 
-class SearchTv {
+class SearchTvSeries {
   final TvRepository repository;
 
-  SearchTv(this.repository);
+  SearchTvSeries(this.repository);
 
-  Future<Either<Failure, List<Tv>>> execute(String query) {
+  Future<Either<Failure, List<TvSeries>>> execute(String query) {
     return repository.searchTv(query);
   }
 }

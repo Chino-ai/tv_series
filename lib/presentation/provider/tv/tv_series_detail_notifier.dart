@@ -1,27 +1,26 @@
-
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tv/tv_detail.dart';
-import 'package:ditonton/domain/usecases/tv/remove_watchlist.dart';
-import 'package:ditonton/domain/usecases/tv/get_tv_detail.dart';
-import 'package:ditonton/domain/usecases/tv/get_tv_recommendation.dart';
+import 'package:ditonton/domain/entities/tv/tv_series_detail.dart';
+import 'package:ditonton/domain/usecases/tv/get_tv_series_recommendation.dart';
 import 'package:ditonton/domain/usecases/tv/get_watchlist_status.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../../../domain/entities/tv/tv.dart';
-import '../../../domain/usecases/movies/remove_watchlist.dart';
+import '../../../domain/entities/tv/tv_series.dart';
+import '../../../domain/usecases/tv/get_tv_detail_series.dart';
+import '../../../domain/usecases/tv/tv_series_remove_watchlist.dart';
 import '../../../domain/usecases/tv/save_watchlist.dart';
 
-class TvDetailNotifier extends ChangeNotifier {
+
+class TvSeriesDetailNotifier extends ChangeNotifier {
   static const watchlistAddSuccessMessage = 'Added to Watchlist';
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
-  final GetTvDetail getTvDetail;
-  final GetTvRecommendations getTvRecommendations;
-  final GetWatchListTvStatus getWatchListStatus;
-  final TvSaveWatchlist saveWatchlist;
-  final TvRemoveWatchlist removeWatchlist;
+  final GetTvDetailSeries getTvDetail;
+  final GetTvSeriesRecommendations getTvRecommendations;
+  final GetWatchListTvSeriesStatus getWatchListStatus;
+  final TvSeriesSaveWatchlist saveWatchlist;
+  final TvSeriesRemoveWatchlist removeWatchlist;
 
-  TvDetailNotifier({
+  TvSeriesDetailNotifier({
     required this.getTvDetail,
     required this.getTvRecommendations,
     required this.getWatchListStatus,
@@ -29,14 +28,14 @@ class TvDetailNotifier extends ChangeNotifier {
     required this.removeWatchlist,
   });
 
-  late TvDetail _tv;
-  TvDetail get tv => _tv;
+  late TvSeriesDetail _tv;
+  TvSeriesDetail get tv => _tv;
 
   RequestState _tvState = RequestState.Empty;
   RequestState get tvState => _tvState;
 
-  List<Tv> _tvRecommendations = [];
-  List<Tv> get tvRecommendations => _tvRecommendations;
+  List<TvSeries> _tvRecommendations = [];
+  List<TvSeries> get tvRecommendations => _tvRecommendations;
 
   RequestState _recommendationState = RequestState.Empty;
   RequestState get recommendationState => _recommendationState;
@@ -81,7 +80,7 @@ class TvDetailNotifier extends ChangeNotifier {
   String _watchlistMessage = '';
   String get watchlistMessage => _watchlistMessage;
 
-  Future<void> addWatchlist(TvDetail tv) async {
+  Future<void> addWatchlist(TvSeriesDetail tv) async {
     final result = await saveWatchlist.execute(tv);
 
     await result.fold(
@@ -96,7 +95,7 @@ class TvDetailNotifier extends ChangeNotifier {
     await loadWatchlistStatus(tv.id);
   }
 
-  Future<void> removeFromWatchlist(TvDetail tv) async {
+  Future<void> removeFromWatchlist(TvSeriesDetail tv) async {
     final result = await removeWatchlist.execute(tv);
 
     await result.fold(

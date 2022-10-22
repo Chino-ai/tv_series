@@ -5,7 +5,7 @@ import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../provider/tv/watch_tv_notifier.dart';
+import '../../provider/tv/watch_tv_series_notifier.dart';
 import '../../widgets/tv_card_list.dart';
 
 class WatchlistTvPage extends StatefulWidget {
@@ -21,7 +21,7 @@ class _WatchlistMoviesPageState extends State<WatchlistTvPage>
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<WatchlistTvNotifier>(context, listen: false)
+        Provider.of<WatchlistTvSeriesNotifier>(context, listen: false)
             .fetchWatchlistTv());
   }
 
@@ -32,7 +32,7 @@ class _WatchlistMoviesPageState extends State<WatchlistTvPage>
   }
 
   void didPopNext() {
-    Provider.of<WatchlistTvNotifier>(context, listen: false)
+    Provider.of<WatchlistTvSeriesNotifier>(context, listen: false)
         .fetchWatchlistTv();
   }
 
@@ -44,7 +44,7 @@ class _WatchlistMoviesPageState extends State<WatchlistTvPage>
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistTvNotifier>(
+        child: Consumer<WatchlistTvSeriesNotifier>(
           builder: (context, data, child) {
             if (data.watchlistState == RequestState.Loading) {
               return Center(

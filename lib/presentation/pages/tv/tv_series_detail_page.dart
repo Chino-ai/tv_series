@@ -4,33 +4,33 @@ import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tv/tv_detail.dart';
-import 'package:ditonton/domain/entities/tv/tv_genre.dart';
+import 'package:ditonton/domain/entities/tv/tv_series_detail.dart';
+import 'package:ditonton/domain/entities/tv/tv_series_genre.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
-import '../../../domain/entities/tv/tv.dart';
+import '../../../domain/entities/tv/tv_series.dart';
 import '../../provider/movie/movie_detail_notifier.dart';
-import '../../provider/tv/tv_detail_notifier.dart';
+import '../../provider/tv/tv_series_detail_notifier.dart';
 
-class TvDetailPage extends StatefulWidget {
+class TvSeriesDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/tv_detail';
 
   final int id;
-  TvDetailPage({required this.id});
+  TvSeriesDetailPage({required this.id});
 
   @override
   _TvDetailPageState createState() => _TvDetailPageState();
 }
 
-class _TvDetailPageState extends State<TvDetailPage> {
+class _TvDetailPageState extends State<TvSeriesDetailPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<TvDetailNotifier>(context, listen: false)
+      Provider.of<TvSeriesDetailNotifier>(context, listen: false)
           .fetchTvDetail(widget.id);
-      Provider.of<TvDetailNotifier>(context, listen: false)
+      Provider.of<TvSeriesDetailNotifier>(context, listen: false)
           .loadWatchlistStatus(widget.id);
     });
   }
@@ -38,7 +38,7 @@ class _TvDetailPageState extends State<TvDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<TvDetailNotifier>(
+      body: Consumer<TvSeriesDetailNotifier>(
         builder: (context, provider, child) {
           if (provider.tvState == RequestState.Loading) {
             return Center(
@@ -63,8 +63,8 @@ class _TvDetailPageState extends State<TvDetailPage> {
 }
 
 class DetailContent extends StatelessWidget {
-  final TvDetail tvDetail;
-  final List<Tv> recommendations;
+  final TvSeriesDetail tvDetail;
+  final List<TvSeries> recommendations;
   final bool isAddedWatchlist;
 
   DetailContent(this.tvDetail, this.recommendations, this.isAddedWatchlist);
@@ -112,27 +112,27 @@ class DetailContent extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () async {
                                 if (!isAddedWatchlist) {
-                                  await Provider.of<TvDetailNotifier>(
+                                  await Provider.of<TvSeriesDetailNotifier>(
                                           context,
                                           listen: false)
                                       .addWatchlist(tvDetail);
                                 } else {
-                                  await Provider.of<TvDetailNotifier>(
+                                  await Provider.of<TvSeriesDetailNotifier>(
                                           context,
                                           listen: false)
                                       .removeFromWatchlist(tvDetail);
                                 }
 
                                 final message =
-                                    Provider.of<TvDetailNotifier>(context,
+                                    Provider.of<TvSeriesDetailNotifier>(context,
                                             listen: false)
                                         .watchlistMessage;
 
                                 if (message ==
-                                        TvDetailNotifier
+                                        TvSeriesDetailNotifier
                                             .watchlistAddSuccessMessage ||
                                     message ==
-                                        TvDetailNotifier
+                                        TvSeriesDetailNotifier
                                             .watchlistRemoveSuccessMessage) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(content: Text(message)));
@@ -189,7 +189,7 @@ class DetailContent extends StatelessWidget {
                               'Recommendations',
                               style: kHeading6,
                             ),
-                            Consumer<TvDetailNotifier>(
+                            Consumer<TvSeriesDetailNotifier>(
                               builder: (context, data, child) {
                                 if (data.recommendationState ==
                                     RequestState.Loading) {
@@ -213,7 +213,7 @@ class DetailContent extends StatelessWidget {
                                             onTap: () {
                                               Navigator.pushReplacementNamed(
                                                 context,
-                                                TvDetailPage.ROUTE_NAME,
+                                                TvSeriesDetailPage.ROUTE_NAME,
                                                 arguments: tv.id,
                                               );
                                             },
@@ -283,7 +283,7 @@ class DetailContent extends StatelessWidget {
     );
   }
 
-  String _showGenres(List<TvGenre> genres) {
+  String _showGenres(List<TvSeriesGenre> genres) {
     String result = '';
     for (var genre in genres) {
       result += genre.name + ', ';

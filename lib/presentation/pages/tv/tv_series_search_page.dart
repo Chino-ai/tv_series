@@ -1,11 +1,11 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/tv/tv_search_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_search_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/tv_card_list.dart';
 
-class TvSearchPage extends StatelessWidget {
+class TvSeriesSearchPage extends StatelessWidget {
   static const ROUTE_NAME = '/search';
 
   @override
@@ -21,7 +21,7 @@ class TvSearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                Provider.of<TvSearchNotifier>(context, listen: false)
+                Provider.of<TvSeriesSearchNotifier>(context, listen: false)
                     .fetchTvSearch(query);
               },
               decoration: InputDecoration(
@@ -36,7 +36,7 @@ class TvSearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<TvSearchNotifier>(
+            Consumer<TvSeriesSearchNotifier>(
               builder: (context, data, child) {
                 if (data.state == RequestState.Loading) {
                   return Center(

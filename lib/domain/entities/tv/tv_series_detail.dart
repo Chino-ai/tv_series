@@ -1,9 +1,9 @@
 
-import 'package:ditonton/domain/entities/tv/tv_genre.dart';
+import 'package:ditonton/domain/entities/tv/tv_series_genre.dart';
 import 'package:equatable/equatable.dart';
 
-class TvDetail extends Equatable {
-  TvDetail({
+class TvSeriesDetail extends Equatable {
+  TvSeriesDetail({
     required this.backdropPath,
     required this.genre,
     required this.id,
@@ -19,7 +19,7 @@ class TvDetail extends Equatable {
   });
 
   final String? backdropPath;
-  final List<TvGenre> genre;
+  final List<TvSeriesGenre> genre;
   final int id;
   final String originalName;
   final String overview;

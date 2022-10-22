@@ -7,26 +7,26 @@ import 'package:ditonton/presentation/pages/movies/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/movies/search_page.dart';
 import 'package:ditonton/presentation/pages/movies/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/movies/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/pages/tv/home_tv_page.dart';
-import 'package:ditonton/presentation/pages/tv/on_air_tv_page.dart';
-import 'package:ditonton/presentation/pages/tv/popular_tv_page.dart';
-import 'package:ditonton/presentation/pages/tv/search_page.dart';
+import 'package:ditonton/presentation/pages/tv/home_tv_series_page.dart';
+import 'package:ditonton/presentation/pages/tv/on_air_tv_series_page.dart';
+import 'package:ditonton/presentation/pages/tv/popular_tv_series_page.dart';
+import 'package:ditonton/presentation/pages/tv/tv_series_search_page.dart';
 import 'package:ditonton/presentation/pages/tv/top_rated_tv_page.dart';
-import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
-import 'package:ditonton/presentation/pages/tv/watchlist_tv_page.dart';
+import 'package:ditonton/presentation/pages/tv/tv_series_detail_page.dart';
+import 'package:ditonton/presentation/pages/tv/watchlist_tv_series_page.dart';
 import 'package:ditonton/presentation/provider/movie/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/movie/top_rated_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/movie/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/movie/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/on_air_tv_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/popular_tv_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/top_rated_tv_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/tv_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/tv_list_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/tv_search_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/watch_tv_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/on_air_tv_series_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/popular_tv_series_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/top_rated_tv_series_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_detail_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_list_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_search_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/watch_tv_series_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -62,31 +62,31 @@ class MyApp extends StatelessWidget {
         ),
 
         ChangeNotifierProvider(
-          create: (_) => di.locator<OnAirTvNotifier>(),
+          create: (_) => di.locator<OnAirTvSeriesNotifier>(),
         ),
 
         ChangeNotifierProvider(
-          create: (_) => di.locator<PopularTvNotifier>(),
+          create: (_) => di.locator<PopularTvSeriesNotifier>(),
         ),
 
         ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedTvNotifier>(),
+          create: (_) => di.locator<TopRatedTvSeriesNotifier>(),
         ),
 
         ChangeNotifierProvider(
-          create: (_) => di.locator<TvDetailNotifier>(),
+          create: (_) => di.locator<TvSeriesDetailNotifier>(),
         ),
 
         ChangeNotifierProvider(
-          create: (_) => di.locator<TvListNotifier>(),
+          create: (_) => di.locator<TvSeriesListNotifier>(),
         ),
 
         ChangeNotifierProvider(
-          create: (_) => di.locator<TvSearchNotifier>(),
+          create: (_) => di.locator<TvSeriesSearchNotifier>(),
         ),
 
         ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistTvNotifier>(),
+          create: (_) => di.locator<WatchlistTvSeriesNotifier>(),
         ),
       ],
       child: MaterialApp(
@@ -114,24 +114,24 @@ class MyApp extends StatelessWidget {
                 settings: settings,
               );
 
-            case HomeTvPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => HomeTvPage());
+            case HomeTvSeriesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => HomeTvSeriesPage());
 
-            case TvSearchPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => TvSearchPage());
+            case TvSeriesSearchPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => TvSeriesSearchPage());
 
-            case OnAirTvPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => OnAirTvPage());
+            case OnAirTvSeriesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => OnAirTvSeriesPage());
 
-            case PopularTvPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => PopularTvPage());
+            case PopularTvSeriesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => PopularTvSeriesPage());
 
-            case TopRatedTvPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => TopRatedTvPage());
+            case TopRatedTvSeriesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => TopRatedTvSeriesPage());
 
-            case TvDetailPage.ROUTE_NAME:
+            case TvSeriesDetailPage.ROUTE_NAME:
               final ids = settings.arguments as int;
-              return CupertinoPageRoute(builder: (_) => TvDetailPage(id: ids,));
+              return CupertinoPageRoute(builder: (_) => TvSeriesDetailPage(id: ids,));
 
             case WatchlistTvPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => WatchlistTvPage());

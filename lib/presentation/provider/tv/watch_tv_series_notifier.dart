@@ -1,11 +1,11 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/foundation.dart';
-import '../../../domain/entities/tv/tv.dart';
-import '../../../domain/usecases/tv/get_watchlist_tv.dart';
+import '../../../domain/entities/tv/tv_series.dart';
+import '../../../domain/usecases/tv/get_watchlist_tv_series.dart';
 
-class WatchlistTvNotifier extends ChangeNotifier {
-  var _watchlistTv = <Tv>[];
-  List<Tv> get watchlistTv => _watchlistTv;
+class WatchlistTvSeriesNotifier extends ChangeNotifier {
+  var _watchlistTv = <TvSeries>[];
+  List<TvSeries> get watchlistTv => _watchlistTv;
 
   var _watchlistState = RequestState.Empty;
   RequestState get watchlistState => _watchlistState;
@@ -13,9 +13,9 @@ class WatchlistTvNotifier extends ChangeNotifier {
   String _message = '';
   String get message => _message;
 
-  WatchlistTvNotifier({required this.getWatchlistTv});
+  WatchlistTvSeriesNotifier({required this.getWatchlistTv});
 
-  final GetWatchlistTv getWatchlistTv;
+  final GetWatchlistTvSeries getWatchlistTv;
 
   Future<void> fetchWatchlistTv() async {
     _watchlistState = RequestState.Loading;

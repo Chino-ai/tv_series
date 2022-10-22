@@ -6,29 +6,29 @@ import 'package:ditonton/presentation/pages/movies/search_page.dart';
 import 'package:ditonton/presentation/pages/movies/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/movies/watchlist_movies_page.dart';
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/pages/tv/popular_tv_page.dart';
+import 'package:ditonton/presentation/pages/tv/popular_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv/top_rated_tv_page.dart';
-import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
-import 'package:ditonton/presentation/pages/tv/watchlist_tv_page.dart';
-import 'package:ditonton/presentation/provider/tv/tv_list_notifier.dart';
+import 'package:ditonton/presentation/pages/tv/tv_series_detail_page.dart';
+import 'package:ditonton/presentation/pages/tv/watchlist_tv_series_page.dart';
+import 'package:ditonton/presentation/provider/tv/tv_series_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../domain/entities/tv/tv.dart';
+import '../../../domain/entities/tv/tv_series.dart';
 import '../movies/about_page.dart';
 
-class HomeTvPage extends StatefulWidget {
+class HomeTvSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = '/home_tv';
   @override
-  _HomeTvPageState createState() => _HomeTvPageState();
+  _HomeTvSeriesPageState createState() => _HomeTvSeriesPageState();
 }
 
-class _HomeTvPageState extends State<HomeTvPage> {
+class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
   @override
   void initState() {
     super.initState();
 
     Future.microtask(
-            () => Provider.of<TvListNotifier>(context, listen: false)
+            () => Provider.of<TvSeriesListNotifier>(context, listen: false)
           ..fetchNowPlayingTv()
           ..fetchPopularTv()
           ..fetchTopRatedTv());
@@ -99,7 +99,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
                 'On Air Tv',
                 style: kHeading6,
               ),
-              Consumer<TvListNotifier>(builder: (context, data, child) {
+              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
                 final state = data.nowPlayingState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -114,9 +114,9 @@ class _HomeTvPageState extends State<HomeTvPage> {
               _buildSubHeading(
                 title: 'Popular',
                 onTap: () =>
-                    Navigator.pushNamed(context, PopularTvPage.ROUTE_NAME),
+                    Navigator.pushNamed(context, PopularTvSeriesPage.ROUTE_NAME),
               ),
-              Consumer<TvListNotifier>(builder: (context, data, child) {
+              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
                 final state = data.popularTvState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -131,9 +131,9 @@ class _HomeTvPageState extends State<HomeTvPage> {
               _buildSubHeading(
                 title: 'Top Rated',
                 onTap: () =>
-                    Navigator.pushNamed(context, TopRatedTvPage.ROUTE_NAME),
+                    Navigator.pushNamed(context, TopRatedTvSeriesPage.ROUTE_NAME),
               ),
-              Consumer<TvListNotifier>(builder: (context, data, child) {
+              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
                 final state = data.topRatedTvState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -175,7 +175,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
 }
 
 class TvList extends StatelessWidget {
-  final List<Tv> tvs;
+  final List<TvSeries> tvs;
 
   TvList(this.tvs);
 
@@ -193,7 +193,7 @@ class TvList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  TvDetailPage.ROUTE_NAME,
+                  TvSeriesDetailPage.ROUTE_NAME,
                   arguments: tv.id,
                 );
               },

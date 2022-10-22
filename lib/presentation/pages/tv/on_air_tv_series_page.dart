@@ -1,25 +1,25 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/provider/movie/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/on_air_tv_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/on_air_tv_series_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../widgets/tv_card_list.dart';
 
-class OnAirTvPage extends StatefulWidget {
+class OnAirTvSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = '/air_tv';
 
   @override
-  _OnAirTvPageState createState() => _OnAirTvPageState();
+  _OnAirTvSeriesPageState createState() => _OnAirTvSeriesPageState();
 }
 
-class _OnAirTvPageState extends State<OnAirTvPage> {
+class _OnAirTvSeriesPageState extends State<OnAirTvSeriesPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<OnAirTvNotifier>(context, listen: false)
+        Provider.of<OnAirTvSeriesNotifier>(context, listen: false)
             .fetchOnAirTv());
   }
 
@@ -31,7 +31,7 @@ class _OnAirTvPageState extends State<OnAirTvPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<OnAirTvNotifier>(
+        child: Consumer<OnAirTvSeriesNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.Loading) {
               return Center(

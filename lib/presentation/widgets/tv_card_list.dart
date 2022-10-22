@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
+import 'package:ditonton/presentation/pages/tv/tv_series_detail_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../domain/entities/tv/tv.dart';
+import '../../domain/entities/tv/tv_series.dart';
 import '../pages/movies/movie_detail_page.dart';
 
 class TvCard extends StatelessWidget {
-  final Tv tv;
+  final TvSeries tv;
 
   TvCard(this.tv);
 
@@ -20,7 +20,7 @@ class TvCard extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            TvDetailPage.ROUTE_NAME,
+            TvSeriesDetailPage.ROUTE_NAME,
             arguments: tv.id,
           );
         },

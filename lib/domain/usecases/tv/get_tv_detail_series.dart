@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
-import '../../entities/tv/tv_detail.dart';
+import '../../entities/tv/tv_series_detail.dart';
 import '../../repositories/tv_repository.dart';
 
-class GetTvDetail {
+class GetTvDetailSeries {
   final TvRepository repository;
 
-  GetTvDetail(this.repository);
+  GetTvDetailSeries(this.repository);
 
-  Future<Either<Failure, TvDetail>> execute(int id){
+  Future<Either<Failure, TvSeriesDetail>> execute(int id){
     return repository.getTvDetail(id);
   }
 }

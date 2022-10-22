@@ -1,5 +1,5 @@
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/provider/tv/top_rated_tv_notifier.dart';
+import 'package:ditonton/presentation/provider/tv/top_rated_tv_series_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,19 +7,19 @@ import 'package:provider/provider.dart';
 import '../../provider/movie/top_rated_movies_notifier.dart';
 import '../../widgets/tv_card_list.dart';
 
-class TopRatedTvPage extends StatefulWidget {
+class TopRatedTvSeriesPage extends StatefulWidget {
   static const ROUTE_NAME = '/top_rated_tv';
 
   @override
-  _TopRatedTvPagePageState createState() => _TopRatedTvPagePageState();
+  _TopRatedTvSeriesPageState createState() => _TopRatedTvSeriesPageState();
 }
 
-class _TopRatedTvPagePageState extends State<TopRatedTvPage> {
+class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<TopRatedTvNotifier>(context, listen: false)
+        Provider.of<TopRatedTvSeriesNotifier>(context, listen: false)
             .fetchTopRatedTv());
   }
 
@@ -31,7 +31,7 @@ class _TopRatedTvPagePageState extends State<TopRatedTvPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TopRatedTvNotifier>(
+        child: Consumer<TopRatedTvSeriesNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.Loading) {
               return Center(

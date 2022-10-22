@@ -1,10 +1,10 @@
-import 'package:ditonton/data/models/tv/tv_genre_model.dart';
+import 'package:ditonton/data/models/tv/tv_series_genre_model.dart';
 import 'package:equatable/equatable.dart';
-import '../../../domain/entities/tv/tv_detail.dart';
+import '../../../domain/entities/tv/tv_series_detail.dart';
 
 
-class TvDetailResponse extends Equatable {
-  TvDetailResponse({
+class TvSeriesDetailResponse extends Equatable {
+  TvSeriesDetailResponse({
     required this.status,
     required this.tagline,
     required this.name,
@@ -22,7 +22,6 @@ class TvDetailResponse extends Equatable {
     required this.popularity,
     required this.posterPath,
     required this.firstAirDate,
-
   });
 
 
@@ -34,7 +33,7 @@ class TvDetailResponse extends Equatable {
   final double voteAverage;
   final int voteCount;
   final String? backdropPath;
-  final List<TvGenreModel> genre;
+  final List<TvSeriesGenreModel> genre;
   final String homepage;
   final int id;
   final String originalLanguage;
@@ -44,8 +43,8 @@ class TvDetailResponse extends Equatable {
   final String posterPath;
   final String firstAirDate;
 
-  factory TvDetailResponse.fromJson(Map<String, dynamic> json) =>
-      TvDetailResponse(
+  factory TvSeriesDetailResponse.fromJson(Map<String, dynamic> json) =>
+      TvSeriesDetailResponse(
         status: json["status"],
         tagline: json["tagline"],
         name: json["name"],
@@ -54,8 +53,8 @@ class TvDetailResponse extends Equatable {
         voteAverage: json["vote_average"].toDouble(),
         voteCount: json["vote_count"],
         backdropPath: json["backdrop_path"],
-        genre: List<TvGenreModel>.from(
-            json["genres"].map((x) => TvGenreModel.fromJson(x))),
+        genre: List<TvSeriesGenreModel>.from(
+            json["genres"].map((x) => TvSeriesGenreModel.fromJson(x))),
         homepage: json["homepage"],
         id: json["id"],
         originalLanguage: json["original_language"],
@@ -88,8 +87,8 @@ class TvDetailResponse extends Equatable {
 
       };
 
-  TvDetail toEntity() {
-    return TvDetail(
+  TvSeriesDetail toEntity() {
+    return TvSeriesDetail(
       backdropPath: this.backdropPath,
       genre: this.genre.map((genre) => genre.toEntity()).toList(),
       id: this.id,

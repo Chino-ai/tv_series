@@ -1,16 +1,16 @@
 import 'dart:async';
 
-import 'package:ditonton/data/models/tv/tv_table.dart';
+import 'package:ditonton/data/models/tv/tv_series_table.dart';
 import 'package:sqflite/sqflite.dart';
 
 
 class TvDatabaseHelper {
-  static TvDatabaseHelper? _tvDatabaseHelper;
+  static TvDatabaseHelper? _databaseHelper;
   TvDatabaseHelper._instance() {
-    _tvDatabaseHelper = this;
+    _databaseHelper = this;
   }
 
-  factory TvDatabaseHelper() => _tvDatabaseHelper ?? TvDatabaseHelper._instance();
+  factory TvDatabaseHelper() => _databaseHelper ?? TvDatabaseHelper._instance();
 
   static Database? _database;
 
@@ -42,12 +42,12 @@ class TvDatabaseHelper {
     ''');
   }
 
-  Future<int> insertWatchlist(TvTable tv) async {
+  Future<int> insertWatchlist(TvSeriesTable tv) async {
     final db = await database;
     return await db!.insert(_tblTvlist, tv.toJson());
   }
 
-  Future<int> removeWatchlist(TvTable tv) async {
+  Future<int> removeWatchlist(TvSeriesTable tv) async {
     final db = await database;
     return await db!.delete(
       _tblTvlist,

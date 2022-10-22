@@ -2,27 +2,27 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/entities/tv/tv.dart';
-import '../../../domain/usecases/tv/get_on_air_tv.dart';
-import '../../../domain/usecases/tv/get_popular_tv.dart';
-import '../../../domain/usecases/tv/get_top_rated_tv.dart';
+import '../../../domain/entities/tv/tv_series.dart';
+import '../../../domain/usecases/tv/get_on_air_tv_series.dart';
+import '../../../domain/usecases/tv/get_popular_tv_series.dart';
+import '../../../domain/usecases/tv/get_top_rated_tv_series.dart';
 
 
-class TvListNotifier extends ChangeNotifier {
-  var _nowPlayingTv = <Tv>[];
-  List<Tv> get nowPlayingTv => _nowPlayingTv;
+class TvSeriesListNotifier extends ChangeNotifier {
+  var _nowPlayingTv = <TvSeries>[];
+  List<TvSeries> get nowPlayingTv => _nowPlayingTv;
 
   RequestState _nowPlayingState = RequestState.Empty;
   RequestState get nowPlayingState => _nowPlayingState;
 
-  var _popularTv = <Tv>[];
-  List<Tv> get popularTv => _popularTv;
+  var _popularTv = <TvSeries>[];
+  List<TvSeries> get popularTv => _popularTv;
 
   RequestState _popularTvState = RequestState.Empty;
   RequestState get popularTvState => _popularTvState;
 
-  var _topRatedTv = <Tv>[];
-  List<Tv> get topRatedTv => _topRatedTv;
+  var _topRatedTv = <TvSeries>[];
+  List<TvSeries> get topRatedTv => _topRatedTv;
 
   RequestState _topRatedTvState = RequestState.Empty;
   RequestState get topRatedTvState => _topRatedTvState;
@@ -30,15 +30,15 @@ class TvListNotifier extends ChangeNotifier {
   String _message = '';
   String get message => _message;
 
-  TvListNotifier({
+  TvSeriesListNotifier({
     required this.getOnAirTv,
     required this.getPopularTv,
     required this.getTopRatedTv,
   });
 
-  final GetOnAirTv getOnAirTv;
-  final GetPopularTv getPopularTv;
-  final GetTopRatedTv getTopRatedTv;
+  final GetOnAirTvSeries getOnAirTv;
+  final GetPopularTvSeries getPopularTv;
+  final GetTopRatedTvSeries getTopRatedTv;
 
   Future<void> fetchNowPlayingTv() async {
     _nowPlayingState = RequestState.Loading;
