@@ -45,13 +45,6 @@ class TvSeriesDetailResponse extends Equatable {
 
   factory TvSeriesDetailResponse.fromJson(Map<String, dynamic> json) =>
       TvSeriesDetailResponse(
-        status: json["status"],
-        tagline: json["tagline"],
-        name: json["name"],
-        numberOfEpisodes: json["number_of_episodes"],
-        numberOfSeasons: json["number_of_seasons"],
-        voteAverage: json["vote_average"].toDouble(),
-        voteCount: json["vote_count"],
         backdropPath: json["backdrop_path"],
         genre: List<TvSeriesGenreModel>.from(
             json["genres"].map((x) => TvSeriesGenreModel.fromJson(x))),
@@ -63,17 +56,18 @@ class TvSeriesDetailResponse extends Equatable {
         popularity: json["popularity"].toDouble(),
         posterPath: json["poster_path"],
         firstAirDate: json["first_air_date"],
+        status: json["status"],
+        tagline: json["tagline"],
+        name: json["name"],
+        numberOfEpisodes: json["number_of_episodes"],
+        numberOfSeasons: json["number_of_seasons"],
+        voteAverage: json["vote_average"].toDouble(),
+        voteCount: json["vote_count"],
+
 
       );
 
   Map<String, dynamic> toJson() => {
-    "status": status,
-    "tagline": tagline,
-    "name": name,
-    "number_of_episodes": numberOfEpisodes,
-    "number_of_seasons":numberOfSeasons,
-    "vote_average": voteAverage,
-    "vote_count": voteCount,
     "backdrop_path": backdropPath,
     "genres": List<dynamic>.from(genre.map((x) => x.toJson())),
     "homepage": homepage,
@@ -84,6 +78,14 @@ class TvSeriesDetailResponse extends Equatable {
     "popularity": popularity,
     "poster_path": posterPath,
     "first_air_date": firstAirDate,
+    "status": status,
+    "tagline": tagline,
+    "name": name,
+    "number_of_episodes": numberOfEpisodes,
+    "number_of_seasons":numberOfSeasons,
+    "vote_average": voteAverage,
+    "vote_count": voteCount,
+
 
       };
 
