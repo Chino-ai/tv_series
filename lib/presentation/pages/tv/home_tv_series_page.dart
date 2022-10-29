@@ -1,5 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/presentation/cubit_movie/top_rated_movies_cubit.dart';
+import 'package:ditonton/presentation/cubit_tv_series/on_air_tv_series_cubit.dart';
+import 'package:ditonton/presentation/cubit_tv_series/popular_tv_series_cubit.dart';
+import 'package:ditonton/presentation/cubit_tv_series/top_rated_tv_series_cubit.dart';
+import 'package:ditonton/presentation/cubit_tv_series/tv_series_list_cubit.dart';
 import 'package:ditonton/presentation/pages/movies/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/movies/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/movies/search_page.dart';
@@ -14,6 +19,7 @@ import 'package:ditonton/presentation/pages/tv/tv_series_search_page.dart';
 import 'package:ditonton/presentation/pages/tv/watchlist_tv_series_page.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_list_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import '../../../domain/entities/tv/tv_series.dart';
 import '../movies/about_page.dart';
@@ -30,10 +36,11 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
     super.initState();
 
     Future.microtask(
-            () => Provider.of<TvSeriesListNotifier>(context, listen: false)
-          ..fetchNowPlayingTv()
-          ..fetchPopularTv()
-          ..fetchTopRatedTv());
+            () => context.read<TvSeriesListCubit>().fetchNowPlayingTv());
+                  context.read<PopularTvSeriesCubit>().fetchPopularTv();
+                  context.read<TopRatedTvSeriesCubit>().fetchTopRatedTv();
+
+
   }
 
   @override
@@ -103,14 +110,14 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                     Navigator.pushNamed(context, OnAirTvSeriesPage.ROUTE_NAME),
               ),
 
-              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-                final state = data.nowPlayingState;
-                if (state == RequestState.Loading) {
+              BlocBuilder<TvSeriesListCubit,TvSeriesListState>(builder: (context, data) {
+
+                if (data is TvSeriesListLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return TvList(data.nowPlayingTv);
+                } else if (data is TvOnAirHasData) {
+                  return TvList(data.result);
                 } else {
                   return Text('Failed');
                 }
@@ -120,14 +127,14 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, PopularTvSeriesPage.ROUTE_NAME),
               ),
-              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-                final state = data.popularTvState;
-                if (state == RequestState.Loading) {
+              BlocBuilder<PopularTvSeriesCubit,PopularTvSeriesState>(builder: (context, data) {
+
+                if (data is PopularTvSeriesLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return TvList(data.popularTv);
+                } else if (data is PopularTvSeriesHasData) {
+                  return TvList(data.result);
                 } else {
                   return Text('Failed');
                 }
@@ -137,14 +144,13 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                 onTap: () =>
                     Navigator.pushNamed(context, TopRatedTvSeriesPage.ROUTE_NAME),
               ),
-              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-                final state = data.topRatedTvState;
-                if (state == RequestState.Loading) {
+              BlocBuilder<TopRatedTvSeriesCubit,TopRatedTvSeriesState>(builder: (context, data) {
+                if (data is TopRatedTvSeriesLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
-                  return TvList(data.topRatedTv);
+                } else if (data is TopRatedTvSeriesHasData) {
+                  return TvList(data.result);
                 } else {
                   return Text('Failed');
                 }

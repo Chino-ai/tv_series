@@ -29,6 +29,9 @@ final kTextTheme = TextTheme(
   bodyText2: kBodyText,
 );
 
+const watchlistAddSuccessMessage = 'Added to Watchlist';
+const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
+
 const kColorScheme = ColorScheme(
   primary: kMikadoYellow,
   primaryContainer: kMikadoYellow,

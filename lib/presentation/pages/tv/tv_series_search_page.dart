@@ -2,7 +2,9 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_search_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import '../../cubit_tv_series/tv_series_search_cubit.dart';
 import '../../widgets/tv_card_list.dart';
 
 class TvSeriesSearchPage extends StatelessWidget {
@@ -21,7 +23,7 @@ class TvSeriesSearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                Provider.of<TvSeriesSearchNotifier>(context, listen: false)
+                context.read<TvSeriesSearchCubit>()
                     .fetchTvSearch(query);
               },
               decoration: InputDecoration(
@@ -36,19 +38,19 @@ class TvSeriesSearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<TvSeriesSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.Loading) {
+            BlocBuilder<TvSeriesSearchCubit, TvSeriesSearchState>(
+              builder: (context, data) {
+                if (data is TvSeriesSearchLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (data.state == RequestState.Loaded) {
-                  final result = data.searchResult;
+                } else if (data is TvSeriesSearchHasData) {
+                  final result = data.result;
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
-                        final tv = data.searchResult[index];
+                        final tv = data.result[index];
                         return TvCard(tv);
                       },
                       itemCount: result.length,
