@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "63379298400",
+    "project_id": "tvseries-72b73",
+    "storage_bucket": "tvseries-72b73.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63379298400:android:a4fd5c427ed6e835344b05",
+        "android_client_info": {
+          "package_name": "com.dicoding.ditonton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63379298400-ve7u2m7hlc8d04tvonrerb2fk3ds44th.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW9Z3cr6aoKj0fzmv7yewnFa4i2znARaU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "63379298400-ve7u2m7hlc8d04tvonrerb2fk3ds44th.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

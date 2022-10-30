@@ -11,6 +11,7 @@ import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/pages/tv/home_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv/watchlist_tv_series_page.dart';
 import 'package:ditonton/presentation/provider/tv/tv_series_list_notifier.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -69,6 +70,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               leading: Icon(Icons.tv),
               title: Text('Tv Series'),
               onTap: () {
+
                 Navigator.pushReplacementNamed(context, HomeTvSeriesPage.ROUTE_NAME);
               },
             ),
