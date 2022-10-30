@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 import '../../domain/entities/movie.dart';
-import '../../domain/entities/tv/tv_series.dart';
 import '../../domain/usecases/movies/get_top_rated_movies.dart';
 part 'top_rated_movies_state.dart';
 

@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import '../../common/constants.dart';
 import '../../domain/entities/tv/tv_series.dart';
 import '../../domain/entities/tv/tv_series_detail.dart';
-import '../../domain/usecases/tv/get_tv_series_recommendation.dart';
 import '../../domain/usecases/tv/get_watchlist_status.dart';
 import '../../domain/usecases/tv/save_watchlist.dart';
 import '../../domain/usecases/tv/tv_series_remove_watchlist.dart';

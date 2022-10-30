@@ -2,9 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:ditonton/domain/usecases/movies/search_movies.dart';
 import 'package:equatable/equatable.dart';
 import '../../domain/entities/movie.dart';
-import '../../domain/entities/tv/tv_series.dart';
-import '../../domain/usecases/tv/search_tv_series.dart';
-
 part 'movies_search_state.dart';
 
 
