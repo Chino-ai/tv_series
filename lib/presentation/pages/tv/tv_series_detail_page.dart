@@ -1,9 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/domain/entities/genre.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/entities/movie_detail.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv/tv_series_detail.dart';
 import 'package:ditonton/domain/entities/tv/tv_series_genre.dart';
 import 'package:ditonton/presentation/cubit_tv_series/tv_series_recommendation_cubit.dart';
@@ -11,11 +7,7 @@ import 'package:ditonton/presentation/cubit_tv_series/watch_tv_series_cubit.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
-import '../../../domain/entities/tv/tv_series.dart';
 import '../../cubit_tv_series/tv_series_detail_cubit.dart';
-import '../../provider/movie/movie_detail_notifier.dart';
-import '../../provider/tv/tv_series_detail_notifier.dart';
 
 class TvSeriesDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/tv_detail';

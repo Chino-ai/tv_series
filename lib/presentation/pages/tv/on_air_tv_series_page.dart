@@ -1,8 +1,5 @@
-import 'package:ditonton/common/state_enum.dart';
+
 import 'package:ditonton/presentation/cubit_tv_series/on_air_tv_series_cubit.dart';
-import 'package:ditonton/presentation/provider/movie/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/tv/on_air_tv_series_notifier.dart';
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';

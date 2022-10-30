@@ -7,16 +7,10 @@ import 'package:ditonton/presentation/pages/movies/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/movies/search_page.dart';
 import 'package:ditonton/presentation/pages/movies/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/movies/watchlist_movies_page.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/pages/tv/home_tv_series_page.dart';
-import 'package:ditonton/presentation/pages/tv/watchlist_tv_series_page.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_list_notifier.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import '../../cubit_movie/movies_list_cubit.dart';
-import '../../provider/movie/movie_list_notifier.dart';
 import 'about_page.dart';
 import 'movie_detail_page.dart';
 

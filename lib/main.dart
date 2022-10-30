@@ -11,7 +11,6 @@ import 'package:ditonton/presentation/cubit_tv_series/on_air_tv_series_cubit.dar
 import 'package:ditonton/presentation/cubit_tv_series/popular_tv_series_cubit.dart';
 import 'package:ditonton/presentation/cubit_tv_series/top_rated_tv_series_cubit.dart';
 import 'package:ditonton/presentation/cubit_tv_series/tv_series_detail_cubit.dart';
-import 'package:ditonton/presentation/cubit_tv_series/tv_series_list_cubit.dart';
 import 'package:ditonton/presentation/cubit_tv_series/tv_series_recommendation_cubit.dart';
 import 'package:ditonton/presentation/cubit_tv_series/tv_series_search_cubit.dart';
 import 'package:ditonton/presentation/cubit_tv_series/watch_tv_series_cubit.dart';
@@ -32,7 +31,6 @@ import 'package:ditonton/presentation/pages/tv/watchlist_tv_series_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ditonton/injection.dart' as di;
 
@@ -93,10 +91,6 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<TvRecommendationCubit>(),
-        ),
-
-        BlocProvider(
-          create: (_) => di.locator<TvSeriesListCubit>(),
         ),
 
         BlocProvider(

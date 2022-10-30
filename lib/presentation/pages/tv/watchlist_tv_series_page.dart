@@ -1,13 +1,8 @@
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation/provider/movie/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 import '../../cubit_tv_series/watch_tv_series_cubit.dart';
-import '../../provider/tv/watch_tv_series_notifier.dart';
 import '../../widgets/tv_card_list.dart';
 
 class WatchlistTvPage extends StatefulWidget {

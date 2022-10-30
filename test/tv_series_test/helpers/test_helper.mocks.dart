@@ -19,7 +19,7 @@ import 'package:ditonton/domain/entities/tv/tv_series.dart' as _i9;
 import 'package:ditonton/domain/entities/tv/tv_series_detail.dart' as _i10;
 import 'package:ditonton/domain/repositories/tv_repository.dart' as _i6;
 import 'package:http/src/base_request.dart' as _i20;
-import 'package:http/src/client.dart' as _i17;
+import 'package:http/src/io_client.dart' as _i17;
 import 'package:http/src/response.dart' as _i4;
 import 'package:http/src/streamed_response.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
@@ -217,7 +217,7 @@ class MockTvDatabaseHelper extends _i1.Mock implements _i15.TvDatabaseHelper {
 /// A class which mocks [Client].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHttpClient extends _i1.Mock implements _i17.Client {
+class MockHttpClient extends _i1.Mock implements _i17.IOClient {
   MockHttpClient() {
     _i1.throwOnMissingStub(this);
   }
@@ -283,12 +283,6 @@ class MockHttpClient extends _i1.Mock implements _i17.Client {
           Invocation.method(#readBytes, [url], {#headers: headers}),
           returnValue: Future<_i19.Uint8List>.value(_i19.Uint8List(0)))
       as _i7.Future<_i19.Uint8List>);
-  @override
-  _i7.Future<_i5.StreamedResponse> send(_i20.BaseRequest? request) =>
-      (super.noSuchMethod(Invocation.method(#send, [request]),
-          returnValue:
-          Future<_i5.StreamedResponse>.value(_FakeStreamedResponse()))
-      as _i7.Future<_i5.StreamedResponse>);
   @override
   void close() => super.noSuchMethod(Invocation.method(#close, []),
       returnValueForMissingStub: null);

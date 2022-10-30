@@ -1,23 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/presentation/cubit_movie/top_rated_movies_cubit.dart';
 import 'package:ditonton/presentation/cubit_tv_series/on_air_tv_series_cubit.dart';
 import 'package:ditonton/presentation/cubit_tv_series/popular_tv_series_cubit.dart';
 import 'package:ditonton/presentation/cubit_tv_series/top_rated_tv_series_cubit.dart';
-import 'package:ditonton/presentation/cubit_tv_series/tv_series_list_cubit.dart';
 import 'package:ditonton/presentation/pages/movies/home_movie_page.dart';
-import 'package:ditonton/presentation/pages/movies/popular_movies_page.dart';
-import 'package:ditonton/presentation/pages/movies/search_page.dart';
-import 'package:ditonton/presentation/pages/movies/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/pages/movies/watchlist_movies_page.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/pages/tv/on_air_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv/popular_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv/top_rated_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv/tv_series_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv/tv_series_search_page.dart';
 import 'package:ditonton/presentation/pages/tv/watchlist_tv_series_page.dart';
-import 'package:ditonton/presentation/provider/tv/tv_series_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +28,7 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
     super.initState();
 
     Future.microtask(
-            () => context.read<TvSeriesListCubit>().fetchNowPlayingTv());
+            () => context.read<OnAirTvSeriesCubit>().fetchOnAirTv());
                   context.read<PopularTvSeriesCubit>().fetchPopularTv();
                   context.read<TopRatedTvSeriesCubit>().fetchTopRatedTv();
 
@@ -110,13 +102,13 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                     Navigator.pushNamed(context, OnAirTvSeriesPage.ROUTE_NAME),
               ),
 
-              BlocBuilder<TvSeriesListCubit,TvSeriesListState>(builder: (context, data) {
+              BlocBuilder<OnAirTvSeriesCubit,OnAirTvSeriesState>(builder: (context, data) {
 
-                if (data is TvSeriesListLoading) {
+                if (data is OnAirTvSeriesLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (data is TvOnAirHasData) {
+                } else if (data is OnAirTvSeriesHasData) {
                   return TvList(data.result);
                 } else {
                   return Text('Failed');
