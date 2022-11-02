@@ -1,3 +1,4 @@
+import 'package:ditonton/common/ssl_pinning.dart';
 import 'package:ditonton/data/datasources/db/movies/movie_remote_data_source.dart';
 import 'package:ditonton/data/datasources/db/tv/tv_local_data_source.dart';
 import 'package:ditonton/data/datasources/db/tv/tv_remote_data_source.dart';
@@ -23,7 +24,6 @@ import 'package:ditonton/presentation/cubit_tv_series/tv_series_detail_cubit.dar
 import 'package:ditonton/presentation/cubit_tv_series/tv_series_recommendation_cubit.dart';
 import 'package:ditonton/presentation/cubit_tv_series/tv_series_search_cubit.dart';
 import 'package:ditonton/presentation/cubit_tv_series/watch_tv_series_cubit.dart';
-import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
 import 'data/datasources/db/movies/database_helper.dart';
@@ -201,5 +201,5 @@ void init() {
   locator.registerLazySingleton<TvDatabaseHelper>(() => TvDatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton(() => HttpSSLPinning.client);
 }

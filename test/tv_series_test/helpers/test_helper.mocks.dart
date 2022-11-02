@@ -18,7 +18,6 @@ import 'package:ditonton/data/models/tv/tv_series_table.dart' as _i14;
 import 'package:ditonton/domain/entities/tv/tv_series.dart' as _i9;
 import 'package:ditonton/domain/entities/tv/tv_series_detail.dart' as _i10;
 import 'package:ditonton/domain/repositories/tv_repository.dart' as _i6;
-import 'package:http/src/base_request.dart' as _i20;
 import 'package:http/src/io_client.dart' as _i17;
 import 'package:http/src/response.dart' as _i4;
 import 'package:http/src/streamed_response.dart' as _i5;

@@ -14,7 +14,6 @@ part 'watch_tv_series_state.dart';
 
 class WatchlistTvSeriesCubit extends Cubit<WatchlistTvSeriesState> {
   final GetWatchlistTvSeries getWatchlistTvSeries;
-
   final GetWatchListTvSeriesStatus getWatchListStatus;
   final TvSeriesSaveWatchlist saveWatchlist;
   final TvSeriesRemoveWatchlist removeWatchlist;
