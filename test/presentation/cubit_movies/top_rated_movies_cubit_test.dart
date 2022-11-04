@@ -43,7 +43,7 @@ void main() {
   final tMovieList = <Movie>[tMovieModel];
 
   blocTest<TopRatedMoviesCubit, TopRatedMoviesState>(
-    'Should emit [Loading, HasData] when data of popular movies is gotten successfully',
+    'Should emit [Loading, HasData] when data of top rated movies is gotten successfully',
     build: () {
       when(mockGetTopRatedMovies.execute())
           .thenAnswer((_) async => Right(tMovieList));
@@ -60,7 +60,7 @@ void main() {
   );
 
   blocTest<TopRatedMoviesCubit, TopRatedMoviesState>(
-    'Should emit [Loading, Error] when get get popular movies is unsuccessful',
+    'Should emit [Loading, Error] when get get top rated movies is unsuccessful',
     build: () {
       when(mockGetTopRatedMovies.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));

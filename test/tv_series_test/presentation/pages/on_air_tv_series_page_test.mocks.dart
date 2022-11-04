@@ -42,7 +42,7 @@ class MockOnAirTvSeriesCubit extends _i1.Mock
           as bool);
   @override
   _i3.Future<void> fetchOnAirTv() =>
-      (super.noSuchMethod(Invocation.method(#getPopularTv, []),
+      (super.noSuchMethod(Invocation.method(#fetchOnAirTv, []),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
   @override

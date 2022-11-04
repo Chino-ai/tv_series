@@ -3,14 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/tv/tv_series.dart';
 import 'package:ditonton/domain/usecases/tv/get_top_rated_tv_series.dart';
-import 'package:ditonton/presentation/cubit_movie/popular_movie_cubit.dart';
-import 'package:ditonton/presentation/cubit_tv_series/popular_tv_series_cubit.dart';
 import 'package:ditonton/presentation/cubit_tv_series/top_rated_tv_series_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
-import 'popular_tv_series_cubit_test.mocks.dart';
 import 'top_rated_tv_series_cubit_test.mocks.dart';
 
 
@@ -44,7 +40,7 @@ void main() {
   final tTvList = <TvSeries>[tTvModel];
 
   blocTest<TopRatedTvSeriesCubit, TopRatedTvSeriesState>(
-    'Should emit [Loading, HasData] when data of popular movies is gotten successfully',
+    'Should emit [Loading, HasData] when data of top rated tv is gotten successfully',
     build: () {
       when(mockGetTopRatedTvSeries.execute())
           .thenAnswer((_) async => Right(tTvList));
@@ -61,7 +57,7 @@ void main() {
   );
 
   blocTest<TopRatedTvSeriesCubit, TopRatedTvSeriesState>(
-    'Should emit [Loading, Error] when get get popular movies is unsuccessful',
+    'Should emit [Loading, Error] when top rated tv is unsuccessful',
     build: () {
       when(mockGetTopRatedTvSeries.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));

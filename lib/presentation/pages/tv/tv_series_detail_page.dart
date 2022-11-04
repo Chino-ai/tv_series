@@ -189,59 +189,7 @@ class DetailContent extends StatelessWidget {
                               'Recommendations',
                               style: kHeading6,
                             ),
-                            BlocBuilder<TvRecommendationCubit, TvRecommendationState>(
-                              builder: (context, data) {
-                                if (data is TvRecommendationLoading) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                } else if (data is TvRecommendationError) {
-                                  return Text(data.message);
-                                } else if (data is TvRecommendationHasData) {
-                                  return Container(
-                                    height: 150,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        final tv = data.result[index];
-                                        return Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: InkWell(
-                                            onTap: () {
-                                              Navigator.pushReplacementNamed(
-                                                context,
-                                                TvSeriesDetailPage.ROUTE_NAME,
-                                                arguments: tv.id,
-                                              );
-                                            },
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(8),
-                                              ),
-                                              child: CachedNetworkImage(
-                                                imageUrl:
-                                                    'https://image.tmdb.org/t/p/w500${tv.posterPath}',
-                                                placeholder: (context, url) =>
-                                                    Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Icon(Icons.error),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      itemCount: data.result.length,
-                                    ),
-                                  );
-                                } else {
-                                  return Container();
-                                }
-                              },
-                            ),
+                            TvRecom(),
                           ],
                         ),
                       ),
@@ -280,6 +228,8 @@ class DetailContent extends StatelessWidget {
     );
   }
 
+
+
   String _showGenres(List<TvSeriesGenre> genres) {
     String result = '';
     for (var genre in genres) {
@@ -304,3 +254,65 @@ class DetailContent extends StatelessWidget {
     }
   }
 }
+
+class TvRecom extends StatelessWidget {
+  const TvRecom({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<TvRecommendationCubit, TvRecommendationState>(
+      builder: (context, data) {
+        if (data is TvRecommendationLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (data is TvRecommendationError) {
+          return Text(data.message);
+        } else if (data is TvRecommendationHasData) {
+          return Container(
+            height: 150,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                final tv = data.result[index];
+                return Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        TvSeriesDetailPage.ROUTE_NAME,
+                        arguments: tv.id,
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                        'https://image.tmdb.org/t/p/w500${tv.posterPath}',
+                        placeholder: (context, url) =>
+                            Center(
+                              child:
+                              CircularProgressIndicator(),
+                            ),
+                        errorWidget:
+                            (context, url, error) =>
+                            Icon(Icons.error),
+                      ),
+                    ),
+                  ),
+                );
+              },
+              itemCount: data.result.length,
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
+}
+

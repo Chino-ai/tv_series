@@ -187,59 +187,7 @@ class DetailContent extends StatelessWidget {
                                       'Recommendations',
                                       style: kHeading6,
                                     ),
-                                    BlocBuilder<MoviesRecommendationCubit, MoviesRecommendationState>(
-                                      builder: (context, data) {
-                                        if (data is MoviesDetailLoading) {
-                                          return Center(
-                                            child: CircularProgressIndicator(),
-                                          );
-                                        } else if (data is MoviesRecommendationError) {
-                                          return Text(data.message);
-                                        } else if (data is MoviesRecommendationHasData) {
-                                          return Container(
-                                            height: 150,
-                                            child: ListView.builder(
-                                              scrollDirection: Axis.horizontal,
-                                              itemBuilder: (context, index) {
-                                                final movie = data.result[index];
-                                                return Padding(
-                                                  padding: const EdgeInsets.all(4.0),
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      Navigator.pushReplacementNamed(
-                                                        context,
-                                                        MovieDetailPage.ROUTE_NAME,
-                                                        arguments: movie.id,
-                                                      );
-                                                    },
-                                                    child: ClipRRect(
-                                                      borderRadius: BorderRadius.all(
-                                                        Radius.circular(8),
-                                                      ),
-                                                      child: CachedNetworkImage(
-                                                        imageUrl:
-                                                            'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                                                        placeholder: (context, url) =>
-                                                            Center(
-                                                          child:
-                                                              CircularProgressIndicator(),
-                                                        ),
-                                                        errorWidget:
-                                                            (context, url, error) =>
-                                                                Icon(Icons.error),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                              itemCount: data.result.length,
-                                            ),
-                                          );
-                                        } else {
-                                          return Container();
-                                        }
-                                      },
-                                    ),
+                                    MovieRecom(),
                                   ],
                                 ),
                               ),
@@ -279,6 +227,7 @@ class DetailContent extends StatelessWidget {
         );
   }
 
+
   String _showGenres(List<Genre> genres) {
     String result = '';
     for (var genre in genres) {
@@ -303,3 +252,65 @@ class DetailContent extends StatelessWidget {
     }
   }
 }
+
+class MovieRecom extends StatelessWidget {
+  const MovieRecom({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MoviesRecommendationCubit, MoviesRecommendationState>(
+      builder: (context, data) {
+        if (data is MoviesRecommendationLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (data is MoviesRecommendationError) {
+          return Text(data.message);
+        } else if (data is MoviesRecommendationHasData) {
+          return Container(
+            height: 150,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                final movie = data.result[index];
+                return Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        MovieDetailPage.ROUTE_NAME,
+                        arguments: movie.id,
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                        'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                        placeholder: (context, url) =>
+                            Center(
+                              child:
+                              CircularProgressIndicator(),
+                            ),
+                        errorWidget:
+                            (context, url, error) =>
+                            Icon(Icons.error),
+                      ),
+                    ),
+                  ),
+                );
+              },
+              itemCount: data.result.length,
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
+}
+

@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../dummy_data/dummy_objects.dart';
 import 'popular_movie_page_test.mocks.dart';
 
 @GenerateMocks([PopularMoviesCubit])
@@ -41,4 +42,38 @@ void main() {
     expect(center, findsOneWidget);
     expect(progressBar, findsOneWidget);
   });
+
+  testWidgets('Page should display center progress bar when error',
+          (WidgetTester tester) async {
+        final expected = PopularMoviesError("Failed");
+
+        when(mockPopularMovieCubit.state).thenReturn(expected);
+        when(mockPopularMovieCubit.stream)
+            .thenAnswer((_) => Stream.value(expected));
+
+        final progressBar = find.byType(Text);
+        final center = find.byType(Center);
+
+        await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
+
+        expect(center, findsWidgets);
+        expect(progressBar, findsWidgets);
+      });
+
+  testWidgets('Page should display center progress bar when loaded',
+          (WidgetTester tester) async {
+        final expected = PopularMoviesHasData(testMovieList);
+
+        when(mockPopularMovieCubit.state).thenReturn(expected);
+        when(mockPopularMovieCubit.stream)
+            .thenAnswer((_) => Stream.value(expected));
+
+
+        final listView = find.byType(ListView);
+
+        await tester.pumpWidget(_makeTestableWidget(PopularMoviesPage()));
+
+
+        expect(listView, findsWidgets);
+      });
 }

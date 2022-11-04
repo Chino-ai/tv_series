@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ditonton/domain/entities/tv/tv_series.dart' as _i7;
 import 'package:ditonton/domain/repositories/tv_repository.dart' as _i2;
-import 'package:ditonton/domain/usecases/tv/get_top_rated_tv_series.dart' as _i4;
+import 'package:ditonton/domain/usecases/tv/search_tv_series.dart' as _i4;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -23,11 +23,11 @@ class _FakeTvRepository_0 extends _i1.Fake implements _i2.TvRepository {}
 
 class _FakeEither_1<L, R> extends _i1.Fake implements _i3.Either<L, R> {}
 
-/// A class which mocks [GetTopRatedTvSeries].
+/// A class which mocks [SearchTvSeries].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetTopRatedTvSeries extends _i1.Mock implements _i4.GetTopRatedTvSeries {
-  MockGetTopRatedTvSeries() {
+class MockGetSeacrhTvSeries extends _i1.Mock implements _i4.SearchTvSeries{
+  MockGetSearchTvSeries() {
     _i1.throwOnMissingStub(this);
   }
   @override
@@ -35,8 +35,8 @@ class MockGetTopRatedTvSeries extends _i1.Mock implements _i4.GetTopRatedTvSerie
       (super.noSuchMethod(Invocation.getter(#repository),
           returnValue: _FakeTvRepository_0()) as _i2.TvRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, List<_i7.TvSeries>>> execute() =>
-      (super.noSuchMethod(Invocation.method(#execute, []),
+  _i5.Future<_i3.Either<_i6.Failure, List<_i7.TvSeries>>> execute(String? query) =>
+      (super.noSuchMethod(Invocation.method(#execute, [query]),
           returnValue: Future<_i3.Either<_i6.Failure, List<_i7.TvSeries>>>.value(
               _FakeEither_1<_i6.Failure, List<_i7.TvSeries>>())) as _i5
           .Future<_i3.Either<_i6.Failure, List<_i7.TvSeries>>>);

@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/tv/tv_series.dart';
 import 'package:ditonton/domain/usecases/tv/get_popular_tv_series.dart';
-import 'package:ditonton/presentation/cubit_movie/popular_movie_cubit.dart';
 import 'package:ditonton/presentation/cubit_tv_series/popular_tv_series_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -42,7 +41,7 @@ void main() {
   final tTvList = <TvSeries>[tTvModel];
 
   blocTest<PopularTvSeriesCubit, PopularTvSeriesState>(
-    'Should emit [Loading, HasData] when data of popular movies is gotten successfully',
+    'Should emit [Loading, HasData] when data of popular tv is gotten successfully',
     build: () {
       when(mockGetPopularTvSeries.execute())
           .thenAnswer((_) async => Right(tTvList));
@@ -59,7 +58,7 @@ void main() {
   );
 
   blocTest<PopularTvSeriesCubit, PopularTvSeriesState>(
-    'Should emit [Loading, Error] when get get popular movies is unsuccessful',
+    'Should emit [Loading, Error] when get get popular tv is unsuccessful',
     build: () {
       when(mockGetPopularTvSeries.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
